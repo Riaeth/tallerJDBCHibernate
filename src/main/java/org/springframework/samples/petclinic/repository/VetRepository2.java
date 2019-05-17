@@ -14,9 +14,8 @@ public interface VetRepository2 extends JpaRepository<Vet, Integer> {
 
 	List<Vet> findByLastNameAndFirstName(String lastname, String firstname);
 
-//	@Query("SELECT v FROM Vets v JOIN FETCH v.specialties s WHERE s.name = :name")
-//	List<Vet> findBySpeciality(@Param("name") String speciality);
+	@Query("SELECT DISTINCT v FROM Vet v JOIN FETCH v.specialties s WHERE s.name = :name")
+	List<Vet> findBySpeciality(@Param("name") String speciality);
 
 	Vet findDistinctByLastName(String lastname);
-	// Vet findById(Integer id);
 }

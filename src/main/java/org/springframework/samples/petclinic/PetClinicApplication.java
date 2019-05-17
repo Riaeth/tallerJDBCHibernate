@@ -27,6 +27,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.samples.petclinic.repository.SpecialtyRepository;
 import org.springframework.samples.petclinic.repository.VetRepository2;
+import org.springframework.samples.petclinic.service.PetClinicService;
 import org.springframework.samples.petclinic.vet.Vet;
 
 /**
@@ -41,10 +42,8 @@ public class PetClinicApplication {
 	private static final Logger log = LoggerFactory.getLogger(PetClinicApplication.class);
 
 	@Autowired
-	private VetRepository2 vetRepo;
-
-	@Autowired
-	private SpecialtyRepository speRepo;
+	private PetClinicService service;
+	
 
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(PetClinicApplication.class, args);
@@ -52,7 +51,7 @@ public class PetClinicApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demoVetRepository(VetRepository2 vetRepository, SpecialtyRepository speRepository) {
+	public CommandLineRunner demoVetRepository() {
 		return (args) -> {
 			log.info("*****************************************************");
 			log.info("BOOTCAMP - Spring y Spring Data - vetRepository");
@@ -72,21 +71,17 @@ public class PetClinicApplication {
 //			System.out.println("Creado con la id: " + id);
 
 			log.info("Buscamos por nombre/Id");
-			vet = vetRepository.findByLastName("VetA").get(0);
-
-			vet = vetRepository.findOne(13);
-		
-			vet = vetRepository.findDistinctByLastName("vetA");
+			vet = service.findVetByLastName("VetA");
 			log.info(vet.getFirstName());
 
 			log.info("Le añadimos una Speciality");
-			vet.addSpecialty(speRepository.findOne(1));
-			vetRepository.save(vet);
-
-			log.info("BOOTCAMP - Spring y Spring Data - vetRepository");
-			for (Vet vet2 : vetRepository.findAll()) {
-				log.info(vet2.toString());
-			}
+//			vet.addSpecialty(speRepository.findOne(1));
+//			vetRepository.save(vet);
+//
+//			log.info("BOOTCAMP - Spring y Spring Data - vetRepository");
+//			for (Vet vet2 : vetRepository.findAll()) {
+//				log.info(vet2.toString());
+//			}
 
 		};
 	}

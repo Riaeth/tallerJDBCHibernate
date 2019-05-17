@@ -9,32 +9,30 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PetClinicServiceImpl implements PetClinicService {
+//Los metodos que devuelven los objetos directos de repository deverian devolver una copia que
+// no esten relacionados con la base de datos.
 
 	@Autowired
 	private VetRepository2 vetRepository;
 
 	@Override
 	public List<Vet> findVetsByLastName(String lastname) {
-		// TODO Auto-generated method stub
-		return null;
+		return vetRepository.findByLastName(lastname);
 	}
 
 	@Override
 	public List<Vet> findVetsByLastNameOrFirstName(String lastname, String firstname) {
-		// TODO Auto-generated method stub
-		return null;
+		return vetRepository.findByLastNameOrFirstName(lastname, firstname);
 	}
 
 	@Override
 	public List<Vet> findVetsByLastNameAndFirstName(String lastname, String firstname) {
-		// TODO Auto-generated method stub
-		return null;
+		return vetRepository.findByLastNameAndFirstName(lastname, firstname);
 	}
 
 	@Override
 	public Vet findVetByLastName(String lastname) {
-		// TODO Auto-generated method stub
-		return null;
+		return vetRepository.findDistinctByLastName(lastname);
 	}
 
 }
