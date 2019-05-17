@@ -78,4 +78,10 @@ public class Vet extends Person implements Serializable {
         getSpecialtiesInternal().add(specialty);
     }
 
+	@Override
+	public String toString() {
+		return "Vet [specialties=" + specialties + ", firstName=" + firstName + ", lastName=" + lastName + ", id=" + id
+				+ "]";
+	}
+
 }
